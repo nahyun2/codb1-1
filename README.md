@@ -5,7 +5,7 @@ GitHub API를 연동해 실제 저장소 목록을 동적으로 불러오며, �
 
 ## 배포 URL
 
-- https://nahyun2.github.io/codb1-1/ *(GitHub Pages 배포 후 업데이트 예정)*
+- https://nahyun2.github.io/codb1-1/
 
 ## 기술 스택
 
