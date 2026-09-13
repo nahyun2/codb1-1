@@ -9,6 +9,7 @@ const projectsStatus = document.querySelector('#projects-status');
 const projectsGrid = document.querySelector('#projects-grid');
 
 const GITHUB_USERNAME = 'nahyun2';
+const MAX_PROJECTS = 6;
 
 // ========== 다크 모드 토글 + localStorage 저장/복원 ==========
 const THEME_KEY = 'theme';
@@ -119,12 +120,17 @@ const fetchProjects = async () => {
 
     const repos = await response.json();
 
-    if (repos.length === 0) {
+    const filteredRepos = repos
+      .filter((repo) => !repo.fork)
+      .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+      .slice(0, MAX_PROJECTS);
+
+    if (filteredRepos.length === 0) {
       renderEmpty();
       return;
     }
 
-    renderProjects(repos);
+    renderProjects(filteredRepos);
   } catch (error) {
     renderProjectsError();
   }
