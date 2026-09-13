@@ -268,13 +268,25 @@ button {
   background-color: var(--color-bg-alt);
 }
 
-/* ========== About ========== */
-.about-grid {
+/* ========== 프로필/콘텐츠 2단 레이아웃 ========== */
+.page-shell {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-lg);
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--space-sm);
 }
 
+.sidebar {
+  align-self: start;
+}
+
+.content-nav {
+  display: none;
+}
+
+/* ========== About ========== */
 .profile-card {
   background-color: var(--color-bg-alt);
   border-radius: var(--radius);
@@ -525,31 +537,38 @@ button {
 
 /* ========== 반응형: 태블릿 (768px) ========== */
 @media (min-width: 768px) {
-  .nav-menu {
-    position: static;
-    height: auto;
-    width: auto;
-    max-width: none;
-    flex-direction: row;
-    background-color: transparent;
-    gap: var(--space-md);
-  }
-
-  .nav-menu.active {
-    right: 0;
-  }
-
-  .theme-toggle {
-    order: 0;
-  }
-
   .hamburger {
     display: none;
   }
 
-  .about-grid {
-    grid-template-columns: 280px 1fr;
-    align-items: start;
+  .page-shell {
+    grid-template-columns: 260px 1fr;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: calc(var(--space-lg) + 60px);
+  }
+
+  .content-nav {
+    display: flex;
+    gap: var(--space-xs);
+    background-color: var(--color-bg-alt);
+    border-radius: 999px;
+    padding: var(--space-xs);
+    margin-bottom: var(--space-lg);
+    box-shadow: var(--shadow);
+    width: fit-content;
+  }
+
+  .content-nav .nav-link {
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+
+  .content-nav .nav-link:hover {
+    background-color: var(--color-white);
   }
 
   .hobby-grid {

@@ -42,20 +42,29 @@
       <div class="hero-illustration" aria-hidden="true"></div>
     </section>
 
-    <section id="about" class="section reveal">
-      <div class="container">
-        <h2 class="section-title">About</h2>
-        <div class="about-grid">
-          <article class="profile-card">
-            <img src="images/profile.jpg" alt="최나현 프로필 사진" class="profile-photo" />
-            <h3 class="profile-name">최나현</h3>
-            <ul class="profile-info">
-              <li>📍 충청북도 청주</li>
-              <li>✉️ chlskgus789@gmail.com</li>
-              <li>🐙 <a href="https://github.com/nahyun2" target="_blank" rel="noopener">github.com/nahyun2</a></li>
-            </ul>
-          </article>
+    <div class="page-shell">
+      <aside class="sidebar">
+        <article class="profile-card">
+          <img src="images/profile.jpg" alt="최나현 프로필 사진" class="profile-photo" />
+          <h3 class="profile-name">최나현</h3>
+          <ul class="profile-info">
+            <li>📍 충청북도 청주</li>
+            <li>✉️ chlskgus789@gmail.com</li>
+            <li>🐙 <a href="https://github.com/nahyun2" target="_blank" rel="noopener">github.com/nahyun2</a></li>
+          </ul>
+        </article>
+      </aside>
 
+      <div class="content">
+        <nav class="content-nav" aria-label="섹션 이동">
+          <a href="#about" class="nav-link">Home</a>
+          <a href="#projects" class="nav-link">Experience</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#life" class="nav-link">Life</a>
+        </nav>
+
+        <section id="about" class="section reveal">
+          <h2 class="section-title">About</h2>
           <div class="about-text">
             <p>안녕하세요, 최나현입니다.</p>
             <p>
@@ -73,71 +82,65 @@
               만드는 개발자가 되는 것이 목표입니다.
             </p>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <section id="skills" class="section reveal">
-      <div class="container">
-        <h2 class="section-title">Skills</h2>
-        <ul class="skill-list">
-          <li class="skill-tag">HTML5</li>
-          <li class="skill-tag">CSS3</li>
-          <li class="skill-tag">JavaScript (ES6+)</li>
-          <li class="skill-tag">React</li>
-          <li class="skill-tag">Tailwind CSS</li>
-          <li class="skill-tag">Bootstrap</li>
-          <li class="skill-tag">Express</li>
-          <li class="skill-tag">Python</li>
-          <li class="skill-tag">PyQt5</li>
-          <li class="skill-tag">Git / GitHub</li>
-          <li class="skill-tag">Figma</li>
-        </ul>
-      </div>
-    </section>
+        <section id="skills" class="section reveal">
+          <h2 class="section-title">Skills</h2>
+          <ul class="skill-list">
+            <li class="skill-tag">HTML5</li>
+            <li class="skill-tag">CSS3</li>
+            <li class="skill-tag">JavaScript (ES6+)</li>
+            <li class="skill-tag">React</li>
+            <li class="skill-tag">Tailwind CSS</li>
+            <li class="skill-tag">Bootstrap</li>
+            <li class="skill-tag">Express</li>
+            <li class="skill-tag">Python</li>
+            <li class="skill-tag">PyQt5</li>
+            <li class="skill-tag">Git / GitHub</li>
+            <li class="skill-tag">Figma</li>
+          </ul>
+        </section>
 
-    <section id="projects" class="section reveal">
-      <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <p class="section-subtitle">GitHub API로 불러온 저장소 목록입니다.</p>
+        <section id="projects" class="section reveal">
+          <h2 class="section-title">Projects</h2>
+          <p class="section-subtitle">GitHub API로 불러온 저장소 목록입니다.</p>
 
-        <div id="projects-status" class="projects-status" role="status"></div>
-        <div id="projects-grid" class="projects-grid"></div>
-      </div>
-    </section>
+          <div id="projects-status" class="projects-status" role="status"></div>
+          <div id="projects-grid" class="projects-grid"></div>
+        </section>
 
-    <section id="life" class="section reveal">
-      <div class="container">
-        <h2 class="section-title">Life</h2>
+        <section id="life" class="section reveal">
+          <h2 class="section-title">Life</h2>
 
-        <article class="life-travel">
-          <h3>🧳 여행 — 12개국 여행 경험</h3>
-          <div class="travel-gallery">
-            <img src="images/travel/travel-1.jpg" alt="여행 사진 1" class="travel-photo" />
-            <img src="images/travel/travel-2.jpg" alt="여행 사진 2" class="travel-photo" />
-            <img src="images/travel/travel-3.jpg" alt="여행 사진 3" class="travel-photo" />
-            <img src="images/travel/travel-4.jpg" alt="여행 사진 4" class="travel-photo" />
-            <img src="images/travel/travel-5.jpg" alt="여행 사진 5" class="travel-photo" />
-            <img src="images/travel/travel-6.jpg" alt="여행 사진 6" class="travel-photo" />
+          <article class="life-travel">
+            <h3>🧳 여행 — 12개국 여행 경험</h3>
+            <div class="travel-gallery">
+              <img src="images/travel/travel-1.jpg" alt="여행 사진 1" class="travel-photo" />
+              <img src="images/travel/travel-2.jpg" alt="여행 사진 2" class="travel-photo" />
+              <img src="images/travel/travel-3.jpg" alt="여행 사진 3" class="travel-photo" />
+              <img src="images/travel/travel-4.jpg" alt="여행 사진 4" class="travel-photo" />
+              <img src="images/travel/travel-5.jpg" alt="여행 사진 5" class="travel-photo" />
+              <img src="images/travel/travel-6.jpg" alt="여행 사진 6" class="travel-photo" />
+            </div>
+          </article>
+
+          <div class="hobby-grid">
+            <article class="hobby-card">
+              <p class="hobby-icon">🚶</p>
+              <p class="hobby-name">산책하기</p>
+            </article>
+            <article class="hobby-card">
+              <p class="hobby-icon">📺</p>
+              <p class="hobby-name">예능 시청 (런닝맨, 크라임씬 등)</p>
+            </article>
+            <article class="hobby-card">
+              <p class="hobby-icon">🖼️</p>
+              <p class="hobby-name">전시회 가기</p>
+            </article>
           </div>
-        </article>
-
-        <div class="hobby-grid">
-          <article class="hobby-card">
-            <p class="hobby-icon">🚶</p>
-            <p class="hobby-name">산책하기</p>
-          </article>
-          <article class="hobby-card">
-            <p class="hobby-icon">📺</p>
-            <p class="hobby-name">예능 시청 (런닝맨, 크라임씬 등)</p>
-          </article>
-          <article class="hobby-card">
-            <p class="hobby-icon">🖼️</p>
-            <p class="hobby-name">전시회 가기</p>
-          </article>
-        </div>
+        </section>
       </div>
-    </section>
+    </div>
 
     <section id="contact" class="section reveal">
       <div class="container">
