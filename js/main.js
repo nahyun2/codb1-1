@@ -5,6 +5,10 @@ const navMenu = document.querySelector('#nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 const topBtn = document.querySelector('#top-btn');
 const themeToggle = document.querySelector('#theme-toggle');
+const projectsStatus = document.querySelector('#projects-status');
+const projectsGrid = document.querySelector('#projects-grid');
+
+const GITHUB_USERNAME = 'nahyun2';
 
 // ========== 다크 모드 토글 + localStorage 저장/복원 ==========
 const THEME_KEY = 'theme';
@@ -66,3 +70,64 @@ window.addEventListener('scroll', handleScroll);
 topBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// ========== GitHub API 연동 (Projects) ==========
+const renderLoading = () => {
+  projectsGrid.innerHTML = '';
+  projectsStatus.textContent = '로딩 중...';
+};
+
+const renderEmpty = () => {
+  projectsGrid.innerHTML = '';
+  projectsStatus.textContent = '표시할 프로젝트가 없습니다.';
+};
+
+const renderProjectsError = () => {
+  projectsGrid.innerHTML = '';
+  projectsStatus.innerHTML = `
+    <p>프로젝트를 불러올 수 없습니다.</p>
+    <button id="retry-btn" type="button" class="btn btn-outline">다시 시도</button>
+  `;
+  document.querySelector('#retry-btn').addEventListener('click', fetchProjects);
+};
+
+const renderProjects = (repos) => {
+  projectsStatus.textContent = '';
+  projectsGrid.innerHTML = repos
+    .map(({ name, description, html_url: htmlUrl, language, stargazers_count: stars }) => `
+      <article class="project-card">
+        <h3>${name}</h3>
+        <p>${description ?? '설명이 없습니다.'}</p>
+        <p>⭐ ${stars}${language ? ` · ${language}` : ''}</p>
+        <a href="${htmlUrl}" target="_blank" rel="noopener" class="btn btn-outline">GitHub에서 보기</a>
+      </article>
+    `)
+    .join('');
+};
+
+const fetchProjects = async () => {
+  renderLoading();
+  try {
+    const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos`);
+
+    if (!response.ok) {
+      if (response.status === 403) {
+        throw new Error('GitHub API 요청 한도(rate limit)를 초과했습니다.');
+      }
+      throw new Error('GitHub 저장소 목록을 불러오지 못했습니다.');
+    }
+
+    const repos = await response.json();
+
+    if (repos.length === 0) {
+      renderEmpty();
+      return;
+    }
+
+    renderProjects(repos);
+  } catch (error) {
+    renderProjectsError();
+  }
+};
+
+fetchProjects();
