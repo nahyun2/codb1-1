@@ -1,1 +1,478 @@
-/* 스타일은 3단계에서 작성 예정 */
+/* ========== CSS 변수 ========== */
+:root {
+  --color-bg: #FFF9E0;
+  --color-bg-alt: #FDEFB0;
+  --color-accent: #F4C430;
+  --color-text: #2B2A1F;
+  --color-text-muted: #8C8768;
+  --color-navy: #12162B;
+  --color-white: #FFFFFF;
+  --color-error: #D64545;
+  --color-success: #2E7D32;
+
+  --font-base: "Pretendard", -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  --container-width: 1100px;
+  --radius: 12px;
+}
+
+/* ========== Reset ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--space-sm);
+}
+
+.section {
+  padding-block: var(--space-xl);
+}
+
+.section-title {
+  font-size: 1.75rem;
+  margin-bottom: var(--space-lg);
+}
+
+.section-subtitle {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+/* ========== 버튼 ========== */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-navy);
+}
+
+.btn-outline {
+  border: 1px solid var(--color-accent);
+  color: var(--color-text);
+}
+
+/* ========== 헤더 / 네비게이션 (Flexbox) ========== */
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: transparent;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm);
+  max-width: var(--container-width);
+  margin-inline: auto;
+}
+
+.nav-logo {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  height: 100vh;
+  width: 70%;
+  max-width: 280px;
+  background-color: var(--color-bg-alt);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  transition: right 0.3s ease;
+}
+
+.nav-menu.active {
+  right: 0;
+  display: flex;
+}
+
+.theme-toggle {
+  font-size: 1.2rem;
+  order: 2;
+}
+
+/* 햄버거 버튼 */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 28px;
+  order: 3;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: var(--color-text);
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ========== Hero ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding: var(--space-sm);
+  max-width: var(--container-width);
+  margin-inline: auto;
+}
+
+.hero-greeting {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.hero-tagline {
+  margin-bottom: var(--space-md);
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.hero-illustration {
+  width: 100%;
+  min-height: 200px;
+  border-radius: var(--radius);
+  background-color: var(--color-bg-alt);
+}
+
+/* ========== About ========== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.profile-card {
+  background-color: var(--color-bg-alt);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.profile-photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-inline: auto;
+  margin-bottom: var(--space-sm);
+  background-color: var(--color-white);
+}
+
+.profile-name {
+  margin-bottom: var(--space-sm);
+}
+
+.profile-info li {
+  margin-bottom: var(--space-xs);
+  font-size: 0.9rem;
+}
+
+.about-text p {
+  margin-bottom: var(--space-sm);
+}
+
+/* ========== Skills ========== */
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.skill-tag {
+  background-color: var(--color-bg-alt);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+/* ========== Projects (Grid, auto-fit) ========== */
+.projects-status {
+  margin-bottom: var(--space-md);
+  color: var(--color-text-muted);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md);
+}
+
+.project-card {
+  background-color: var(--color-bg-alt);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+}
+
+.project-card h3 {
+  margin-bottom: var(--space-xs);
+}
+
+.project-card p {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-sm);
+}
+
+/* ========== Life ========== */
+.life-travel {
+  margin-bottom: var(--space-lg);
+}
+
+.life-travel h3 {
+  margin-bottom: var(--space-sm);
+}
+
+.travel-gallery {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: var(--space-xs);
+}
+
+.travel-photo {
+  flex: 0 0 220px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  scroll-snap-align: start;
+  background-color: var(--color-bg-alt);
+}
+
+.hobby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.hobby-card {
+  background-color: var(--color-bg-alt);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.hobby-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-xs);
+}
+
+/* ========== Contact ========== */
+.contact-form {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.7rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-text-muted);
+  background-color: var(--color-white);
+  color: var(--color-text);
+  font-family: inherit;
+}
+
+.error-message {
+  color: var(--color-error);
+  font-size: 0.8rem;
+  min-height: 1em;
+}
+
+.form-success {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+/* ========== Footer ========== */
+#footer {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  padding-block: var(--space-lg);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  font-size: 1.3rem;
+}
+
+/* ========== Top 버튼 ========== */
+.top-btn {
+  position: fixed;
+  right: var(--space-md);
+  bottom: var(--space-md);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: var(--color-navy);
+  font-size: 1.2rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 90;
+}
+
+.top-btn.show {
+  display: flex;
+}
+
+/* ========== 반응형: 태블릿 (768px) ========== */
+@media (min-width: 768px) {
+  .nav-menu {
+    position: static;
+    height: auto;
+    width: auto;
+    max-width: none;
+    flex-direction: row;
+    background-color: transparent;
+    gap: var(--space-md);
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .theme-toggle {
+    order: 0;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .about-grid {
+    grid-template-columns: 280px 1fr;
+    align-items: start;
+  }
+
+  .hobby-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ========== 반응형: 데스크톱 (1024px) ========== */
+@media (min-width: 1024px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hero-content {
+    max-width: 55%;
+  }
+
+  .hero-illustration {
+    flex: 1;
+    min-height: 320px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
