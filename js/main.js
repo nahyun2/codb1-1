@@ -1,3 +1,8 @@
+// ========== 새로고침 시 이전 스크롤 위치 복원 방지 ==========
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
 // ========== 요소 선택 ==========
 const header = document.querySelector('#header');
 const hamburger = document.querySelector('#hamburger');
