@@ -4,6 +4,25 @@ const hamburger = document.querySelector('#hamburger');
 const navMenu = document.querySelector('#nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 const topBtn = document.querySelector('#top-btn');
+const themeToggle = document.querySelector('#theme-toggle');
+
+// ========== 다크 모드 토글 + localStorage 저장/복원 ==========
+const THEME_KEY = 'theme';
+
+const applyTheme = (theme) => {
+  document.documentElement.setAttribute('data-theme', theme);
+  themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+};
+
+const savedTheme = localStorage.getItem(THEME_KEY);
+applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
+
+themeToggle.addEventListener('click', () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  applyTheme(nextTheme);
+  localStorage.setItem(THEME_KEY, nextTheme);
+});
 
 // ========== 햄버거 메뉴 토글 ==========
 const toggleMenu = () => {
