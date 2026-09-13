@@ -7,6 +7,14 @@ const topBtn = document.querySelector('#top-btn');
 const themeToggle = document.querySelector('#theme-toggle');
 const projectsStatus = document.querySelector('#projects-status');
 const projectsGrid = document.querySelector('#projects-grid');
+const contactForm = document.querySelector('#contact-form');
+const nameInput = document.querySelector('#name');
+const emailInput = document.querySelector('#email');
+const messageInput = document.querySelector('#message');
+const nameError = document.querySelector('#name-error');
+const emailError = document.querySelector('#email-error');
+const messageError = document.querySelector('#message-error');
+const formSuccess = document.querySelector('#form-success');
 
 const GITHUB_USERNAME = 'nahyun2';
 const MAX_PROJECTS = 6;
@@ -137,3 +145,50 @@ const fetchProjects = async () => {
 };
 
 fetchProjects();
+
+// ========== Contact 폼 유효성 검사 ==========
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const validateName = () => {
+  const value = nameInput.value.trim();
+  nameError.textContent = value ? '' : '이름을 입력해주세요.';
+  return Boolean(value);
+};
+
+const validateEmail = () => {
+  const value = emailInput.value.trim();
+  if (!value) {
+    emailError.textContent = '이메일을 입력해주세요.';
+    return false;
+  }
+  if (!EMAIL_REGEX.test(value)) {
+    emailError.textContent = '올바른 이메일 형식이 아닙니다.';
+    return false;
+  }
+  emailError.textContent = '';
+  return true;
+};
+
+const validateMessage = () => {
+  const value = messageInput.value.trim();
+  messageError.textContent = value ? '' : '메시지를 입력해주세요.';
+  return Boolean(value);
+};
+
+nameInput.addEventListener('input', validateName);
+emailInput.addEventListener('input', validateEmail);
+messageInput.addEventListener('input', validateMessage);
+
+contactForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  formSuccess.textContent = '';
+
+  const isNameValid = validateName();
+  const isEmailValid = validateEmail();
+  const isMessageValid = validateMessage();
+
+  if (isNameValid && isEmailValid && isMessageValid) {
+    formSuccess.textContent = '메시지가 성공적으로 전송되었습니다!';
+    contactForm.reset();
+  }
+});
