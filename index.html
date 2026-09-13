@@ -3,51 +3,183 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>최나현 포트폴리오</title>
+  <title>자기소개 웹사이트</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <header id="header">
-    <nav id="nav">
-      <!-- 로고 -->
-      <!-- 메뉴 (Home / Experience / Skills / Education) -->
-      <!-- 다크모드 토글 버튼 -->
-      <!-- 햄버거 버튼 -->
+    <nav id="nav" class="nav">
+      <div class="nav-logo">최나현</div>
+
+      <ul id="nav-menu" class="nav-menu">
+        <li><a href="#about" class="nav-link">Home</a></li>
+        <li><a href="#projects" class="nav-link">Experience</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#life" class="nav-link">Life</a></li>
+      </ul>
+
+      <button id="theme-toggle" type="button" class="theme-toggle" aria-label="다크 모드 전환">🌙</button>
+
+      <button id="hamburger" type="button" class="hamburger" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </nav>
   </header>
 
   <main>
-    <section id="hero">
-      <!-- Hero: 인사말 + CTA 버튼 -->
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <p class="hero-greeting">안녕하세요!</p>
+        <h1 class="hero-title">최나현입니다.</h1>
+        <p class="hero-tagline">감자에서 사람이 되고 있는 개발자입니다~</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+          <a href="#contact" class="btn btn-outline">연락하기</a>
+        </div>
+      </div>
+      <div class="hero-illustration" aria-hidden="true"></div>
     </section>
 
-    <section id="about">
-      <!-- About: 프로필 카드 + 자기소개 텍스트 -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">About</h2>
+        <div class="about-grid">
+          <article class="profile-card">
+            <img src="images/profile.jpg" alt="최나현 프로필 사진" class="profile-photo" />
+            <h3 class="profile-name">최나현</h3>
+            <ul class="profile-info">
+              <li>📍 충청북도 청주</li>
+              <li>✉️ chlskgus789@gmail.com</li>
+              <li>🐙 <a href="https://github.com/nahyun2" target="_blank" rel="noopener">github.com/nahyun2</a></li>
+            </ul>
+          </article>
+
+          <div class="about-text">
+            <p>안녕하세요, 최나현입니다.</p>
+            <p>
+              충북대학교 소프트웨어학부에서 3학년으로 재학하며, 주로 프론트엔드를
+              중심으로 개발을 공부하고 있습니다. HTML/CSS/JavaScript부터 React까지
+              사용자와 맞닿는 화면을 만드는 과정에 가장 큰 흥미를 느끼고, 백엔드와
+              AI 영역도 함께 다루며 작업의 폭을 넓혀가고 있습니다.
+            </p>
+            <p>
+              멋쟁이사자처럼(Likelion)에서 팀 프로젝트를 진행하며 실제 서비스를
+              기획부터 구현까지 완성해보는 경험을 쌓고 있습니다.
+            </p>
+            <p>
+              화려한 기술보다, 일상에서 실제로 쓰이는 따뜻하고 실용적인 기술을
+              만드는 개발자가 되는 것이 목표입니다.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="skills">
-      <!-- Skills: 태그 목록 -->
+    <section id="skills" class="section">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <ul class="skill-list">
+          <li class="skill-tag">HTML5</li>
+          <li class="skill-tag">CSS3</li>
+          <li class="skill-tag">JavaScript (ES6+)</li>
+          <li class="skill-tag">React</li>
+          <li class="skill-tag">Tailwind CSS</li>
+          <li class="skill-tag">Bootstrap</li>
+          <li class="skill-tag">Express</li>
+          <li class="skill-tag">Python</li>
+          <li class="skill-tag">PyQt5</li>
+          <li class="skill-tag">Git / GitHub</li>
+          <li class="skill-tag">Figma</li>
+        </ul>
+      </div>
     </section>
 
-    <section id="projects">
-      <!-- Projects: GitHub API 카드 -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">GitHub API로 불러온 저장소 목록입니다.</p>
+
+        <div id="projects-status" class="projects-status" role="status"></div>
+        <div id="projects-grid" class="projects-grid"></div>
+      </div>
     </section>
 
-    <section id="life">
-      <!-- Life: 취미/여행 -->
+    <section id="life" class="section">
+      <div class="container">
+        <h2 class="section-title">Life</h2>
+
+        <article class="life-travel">
+          <h3>🧳 여행 — 12개국 여행 경험</h3>
+          <div class="travel-gallery">
+            <img src="images/travel/travel-1.jpg" alt="여행 사진 1" class="travel-photo" />
+            <img src="images/travel/travel-2.jpg" alt="여행 사진 2" class="travel-photo" />
+            <img src="images/travel/travel-3.jpg" alt="여행 사진 3" class="travel-photo" />
+            <img src="images/travel/travel-4.jpg" alt="여행 사진 4" class="travel-photo" />
+            <img src="images/travel/travel-5.jpg" alt="여행 사진 5" class="travel-photo" />
+            <img src="images/travel/travel-6.jpg" alt="여행 사진 6" class="travel-photo" />
+          </div>
+        </article>
+
+        <div class="hobby-grid">
+          <article class="hobby-card">
+            <p class="hobby-icon">🚶</p>
+            <p class="hobby-name">산책하기</p>
+          </article>
+          <article class="hobby-card">
+            <p class="hobby-icon">📺</p>
+            <p class="hobby-name">예능 시청 (런닝맨, 크라임씬 등)</p>
+          </article>
+          <article class="hobby-card">
+            <p class="hobby-icon">🖼️</p>
+            <p class="hobby-name">전시회 가기</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="contact">
-      <!-- Contact: 문의 폼 -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="form-group">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" required />
+            <span class="error-message" id="name-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" required />
+            <span class="error-message" id="email-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="message">메시지</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <span class="error-message" id="message-error"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary">보내기</button>
+          <p id="form-success" class="form-success" role="status"></p>
+        </form>
+      </div>
     </section>
   </main>
 
   <footer id="footer">
-    <!-- 저작권, 소셜 링크 -->
+    <div class="container footer-inner">
+      <p>&copy; 2026 최나현. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://github.com/nahyun2" target="_blank" rel="noopener" aria-label="GitHub">🐙</a>
+        <a href="#" aria-label="Blog">📝</a>
+        <a href="#" aria-label="LinkedIn">💼</a>
+      </div>
+    </div>
   </footer>
 
-  <!-- 스크롤 Top 버튼 -->
-  <button id="top-btn" type="button" aria-label="맨 위로 이동"></button>
+  <button id="top-btn" type="button" class="top-btn" aria-label="맨 위로 이동">↑</button>
 
   <script src="js/main.js" defer></script>
 </body>
