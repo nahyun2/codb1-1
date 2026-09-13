@@ -20,6 +20,20 @@
 
   --container-width: 1100px;
   --radius: 12px;
+  --shadow: 0 4px 16px rgba(43, 42, 31, 0.1);
+  --transition: 0.25s ease;
+}
+
+/* ========== 다크 모드 변수 ========== */
+[data-theme="dark"] {
+  --color-bg: #12162B;
+  --color-bg-alt: #1C2140;
+  --color-accent: #F4C430;
+  --color-text: #F5F2E4;
+  --color-text-muted: #A6A28A;
+  --color-navy: #12162B;
+  --color-white: #1C2140;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 /* ========== Reset ========== */
@@ -38,6 +52,7 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
+  transition: background-color var(--transition), color var(--transition);
 }
 
 ul {
@@ -88,6 +103,12 @@ button {
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius);
   font-weight: 600;
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 
 .btn-primary {
@@ -108,6 +129,12 @@ button {
   right: 0;
   z-index: 100;
   background-color: transparent;
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+#header.scrolled {
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow);
 }
 
 .nav {
@@ -122,6 +149,14 @@ button {
 .nav-logo {
   font-weight: 700;
   font-size: 1.1rem;
+}
+
+.nav-link {
+  transition: color var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--color-accent);
 }
 
 .nav-menu {
@@ -147,6 +182,11 @@ button {
 .theme-toggle {
   font-size: 1.2rem;
   order: 2;
+  transition: transform var(--transition);
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg);
 }
 
 /* 햄버거 버튼 */
@@ -228,6 +268,12 @@ button {
   border-radius: var(--radius);
   padding: var(--space-md);
   text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.profile-card:hover {
+  transform: translateY(-4px);
 }
 
 .profile-photo {
@@ -265,6 +311,12 @@ button {
   padding: 0.5rem 1rem;
   border-radius: 999px;
   font-size: 0.9rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.skill-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 
 /* ========== Projects (Grid, auto-fit) ========== */
@@ -283,6 +335,12 @@ button {
   background-color: var(--color-bg-alt);
   border-radius: var(--radius);
   padding: var(--space-md);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
 }
 
 .project-card h3 {
@@ -319,6 +377,11 @@ button {
   border-radius: var(--radius);
   scroll-snap-align: start;
   background-color: var(--color-bg-alt);
+  transition: transform var(--transition);
+}
+
+.travel-photo:hover {
+  transform: scale(1.05);
 }
 
 .hobby-grid {
@@ -332,6 +395,12 @@ button {
   border-radius: var(--radius);
   padding: var(--space-md);
   text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.hobby-card:hover {
+  transform: translateY(-4px);
 }
 
 .hobby-icon {
@@ -366,6 +435,13 @@ button {
   background-color: var(--color-white);
   color: var(--color-text);
   font-family: inherit;
+  transition: border-color var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
 }
 
 .error-message {
@@ -400,6 +476,14 @@ button {
   font-size: 1.3rem;
 }
 
+.social-links a {
+  transition: transform var(--transition);
+}
+
+.social-links a:hover {
+  transform: translateY(-3px);
+}
+
 /* ========== Top 버튼 ========== */
 .top-btn {
   position: fixed;
@@ -415,6 +499,12 @@ button {
   align-items: center;
   justify-content: center;
   z-index: 90;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.top-btn:hover {
+  transform: translateY(-3px);
 }
 
 .top-btn.show {
