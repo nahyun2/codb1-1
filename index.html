@@ -33,13 +33,14 @@
       <div class="hero-content">
         <p class="hero-greeting">안녕하세요!</p>
         <h1 class="hero-title">최나현입니다.</h1>
-        <p class="hero-tagline">감자에서 사람이 되고 있는 개발자입니다:D</p>
+        <div class="hero-tagline-box">
+          <p class="hero-tagline" id="hero-tagline"></p>
+        </div>
         <div class="hero-cta">
           <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
           <a href="#contact" class="btn btn-outline">연락하기</a>
         </div>
       </div>
-      <div class="hero-illustration" aria-hidden="true"></div>
     </section>
 
     <section id="about" class="section reveal">
@@ -101,6 +102,7 @@
         <h2 class="section-title">Projects</h2>
         <p class="section-subtitle">GitHub API로 불러온 저장소 목록입니다.</p>
 
+        <div id="projects-filter" class="projects-filter"></div>
         <div id="projects-status" class="projects-status" role="status"></div>
         <div id="projects-grid" class="projects-grid"></div>
       </div>
@@ -142,7 +144,7 @@
     <section id="contact" class="section reveal">
       <div class="container">
         <h2 class="section-title">Contact</h2>
-        <form id="contact-form" class="contact-form" novalidate>
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/xqpaaojj" method="POST" novalidate>
           <div class="form-group">
             <label for="name">이름</label>
             <input type="text" id="name" name="name" required />

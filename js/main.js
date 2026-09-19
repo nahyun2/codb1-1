@@ -10,8 +10,10 @@ const navMenu = document.querySelector('#nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 const topBtn = document.querySelector('#top-btn');
 const themeToggle = document.querySelector('#theme-toggle');
+const projectsFilter = document.querySelector('#projects-filter');
 const projectsStatus = document.querySelector('#projects-status');
 const projectsGrid = document.querySelector('#projects-grid');
+const heroTagline = document.querySelector('#hero-tagline');
 const contactForm = document.querySelector('#contact-form');
 const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
@@ -32,8 +34,17 @@ const applyTheme = (theme) => {
   themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
 };
 
+const prefersDarkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 const savedTheme = localStorage.getItem(THEME_KEY);
-applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
+
+applyTheme(savedTheme ?? (prefersDarkQuery.matches ? 'dark' : 'light'));
+
+// 사용자가 직접 토글한 적이 없다면 시스템 다크 모드 설정 변경을 실시간으로 반영
+prefersDarkQuery.addEventListener('change', (event) => {
+  if (!localStorage.getItem(THEME_KEY)) {
+    applyTheme(event.matches ? 'dark' : 'light');
+  }
+});
 
 themeToggle.addEventListener('click', () => {
   const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -68,6 +79,59 @@ navLinks.forEach((link) => {
   });
 });
 
+// ========== Hero 섹션 타이핑 효과 (반복) ==========
+const TAGLINE_TEXT = '감자에서 사람이 되고 있는 개발자입니다:D';
+const HIGHLIGHT_WORD = '감자';
+const TYPING_SPEED_MS = 120;
+const ERASING_SPEED_MS = 60;
+const PAUSE_AFTER_TYPE_MS = 1500;
+const PAUSE_AFTER_ERASE_MS = 400;
+
+const renderTagline = (visibleLength) => {
+  const highlightLength = Math.min(visibleLength, HIGHLIGHT_WORD.length);
+  const restLength = visibleLength - highlightLength;
+  const highlightedPart = TAGLINE_TEXT.slice(0, highlightLength);
+  const restPart = TAGLINE_TEXT.slice(HIGHLIGHT_WORD.length, HIGHLIGHT_WORD.length + restLength);
+  heroTagline.innerHTML = `<span class="highlight-potato">${highlightedPart}</span>${restPart}`;
+};
+
+const runTaglineTypingLoop = () => {
+  let index = 0;
+  let isDeleting = false;
+
+  const tick = () => {
+    if (!isDeleting) {
+      index += 1;
+      renderTagline(index);
+
+      if (index === TAGLINE_TEXT.length) {
+        isDeleting = true;
+        setTimeout(tick, PAUSE_AFTER_TYPE_MS);
+        return;
+      }
+
+      setTimeout(tick, TYPING_SPEED_MS);
+    } else {
+      index -= 1;
+      renderTagline(index);
+
+      if (index === 0) {
+        isDeleting = false;
+        setTimeout(tick, PAUSE_AFTER_ERASE_MS);
+        return;
+      }
+
+      setTimeout(tick, ERASING_SPEED_MS);
+    }
+  };
+
+  tick();
+};
+
+if (heroTagline) {
+  runTaglineTypingLoop();
+}
+
 // ========== 스크롤에 따른 헤더 스타일 & Top 버튼 표시 ==========
 const HEADER_SCROLL_THRESHOLD = 60;
 const TOP_BTN_SCROLL_THRESHOLD = 300;
@@ -86,17 +150,23 @@ topBtn.addEventListener('click', () => {
 });
 
 // ========== GitHub API 연동 (Projects) ==========
+let currentProjects = [];
+let activeLanguage = '전체';
+
 const renderLoading = () => {
+  projectsFilter.innerHTML = '';
   projectsGrid.innerHTML = '';
   projectsStatus.textContent = '로딩 중...';
 };
 
 const renderEmpty = () => {
+  projectsFilter.innerHTML = '';
   projectsGrid.innerHTML = '';
   projectsStatus.textContent = '표시할 프로젝트가 없습니다.';
 };
 
 const renderProjectsError = () => {
+  projectsFilter.innerHTML = '';
   projectsGrid.innerHTML = '';
   projectsStatus.innerHTML = `
     <p>프로젝트를 불러올 수 없습니다.</p>
@@ -107,6 +177,13 @@ const renderProjectsError = () => {
 
 const renderProjects = (repos) => {
   projectsStatus.textContent = '';
+
+  if (repos.length === 0) {
+    projectsGrid.innerHTML = '';
+    projectsStatus.textContent = '해당 언어로 작성된 프로젝트가 없습니다.';
+    return;
+  }
+
   projectsGrid.innerHTML = repos
     .map(({ name, description, html_url: htmlUrl, language, stargazers_count: stars }) => `
       <article class="project-card">
@@ -117,6 +194,32 @@ const renderProjects = (repos) => {
       </article>
     `)
     .join('');
+};
+
+const applyLanguageFilter = (language) => {
+  activeLanguage = language;
+
+  projectsFilter.querySelectorAll('.filter-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.language === language);
+  });
+
+  const filtered = language === '전체'
+    ? currentProjects
+    : currentProjects.filter((repo) => repo.language === language);
+
+  renderProjects(filtered);
+};
+
+const renderLanguageFilters = (repos) => {
+  const languages = ['전체', ...new Set(repos.map((repo) => repo.language).filter(Boolean))];
+
+  projectsFilter.innerHTML = languages
+    .map((language) => `<button type="button" class="filter-btn" data-language="${language}">${language}</button>`)
+    .join('');
+
+  projectsFilter.querySelectorAll('.filter-btn').forEach((btn) => {
+    btn.addEventListener('click', () => applyLanguageFilter(btn.dataset.language));
+  });
 };
 
 const fetchProjects = async () => {
@@ -143,7 +246,9 @@ const fetchProjects = async () => {
       return;
     }
 
-    renderProjects(filteredRepos);
+    currentProjects = filteredRepos;
+    renderLanguageFilters(filteredRepos);
+    applyLanguageFilter('전체');
   } catch (error) {
     renderProjectsError();
   }
@@ -151,8 +256,9 @@ const fetchProjects = async () => {
 
 fetchProjects();
 
-// ========== Contact 폼 유효성 검사 ==========
+// ========== Contact 폼 유효성 검사 & 실제 전송 (Formspree) ==========
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const submitBtn = contactForm.querySelector('button[type="submit"]');
 
 const validateName = () => {
   const value = nameInput.value.trim();
@@ -184,7 +290,7 @@ nameInput.addEventListener('input', validateName);
 emailInput.addEventListener('input', validateEmail);
 messageInput.addEventListener('input', validateMessage);
 
-contactForm.addEventListener('submit', (event) => {
+contactForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   formSuccess.textContent = '';
 
@@ -192,9 +298,32 @@ contactForm.addEventListener('submit', (event) => {
   const isEmailValid = validateEmail();
   const isMessageValid = validateMessage();
 
-  if (isNameValid && isEmailValid && isMessageValid) {
+  if (!(isNameValid && isEmailValid && isMessageValid)) {
+    return;
+  }
+
+  submitBtn.disabled = true;
+  formSuccess.style.color = '';
+  formSuccess.textContent = '전송 중...';
+
+  try {
+    const response = await fetch(contactForm.action, {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: new FormData(contactForm),
+    });
+
+    if (!response.ok) {
+      throw new Error('메시지 전송에 실패했습니다.');
+    }
+
     formSuccess.textContent = '메시지가 성공적으로 전송되었습니다!';
     contactForm.reset();
+  } catch (error) {
+    formSuccess.style.color = 'var(--color-error)';
+    formSuccess.textContent = '전송에 실패했습니다. 잠시 후 다시 시도해주세요.';
+  } finally {
+    submitBtn.disabled = false;
   }
 });
 

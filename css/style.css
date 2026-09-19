@@ -251,21 +251,41 @@ button {
   margin-bottom: var(--space-sm);
 }
 
-.hero-tagline {
+.hero-tagline-box {
+  display: inline-block;
+  background-color: var(--color-bg-alt);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius);
+  padding: 0.75rem 1.25rem;
   margin-bottom: var(--space-md);
+}
+
+.hero-tagline {
+  margin-bottom: 0;
+  min-height: 1.5em;
+}
+
+.hero-tagline::after {
+  content: "|";
+  margin-left: 2px;
+  animation: blink-caret 0.8s step-end infinite;
+}
+
+@keyframes blink-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.hero-tagline .highlight-potato {
+  color: #8B4513;
+  font-weight: 700;
 }
 
 .hero-cta {
   display: flex;
   gap: var(--space-sm);
   flex-wrap: wrap;
-}
-
-.hero-illustration {
-  width: 100%;
-  min-height: 200px;
-  border-radius: var(--radius);
-  background-color: var(--color-bg-alt);
 }
 
 /* ========== About ========== */
@@ -332,6 +352,31 @@ button {
 }
 
 /* ========== Projects (Grid, auto-fit) ========== */
+.projects-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-accent);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  transition: background-color var(--transition), color var(--transition), transform var(--transition);
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background-color: var(--color-accent);
+  color: var(--color-navy);
+}
+
 .projects-status {
   margin-bottom: var(--space-md);
   color: var(--color-text-muted);
@@ -560,19 +605,9 @@ button {
 
 /* ========== 반응형: 데스크톱 (1024px) ========== */
 @media (min-width: 1024px) {
-  .hero {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   .hero-content {
-    max-width: 55%;
-  }
-
-  .hero-illustration {
-    flex: 1;
-    min-height: 320px;
+    max-width: 700px;
+    margin-inline: auto;
   }
 
   .section-title {
