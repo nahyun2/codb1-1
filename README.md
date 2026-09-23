@@ -55,10 +55,13 @@ GitHub API를 연동해 실제 저장소 목록을 동적으로 불러오며, �
 
 1. 저장소를 클론합니다.
 2. VS Code에서 열고 Live Server 확장으로 `index.html`을 실행합니다.
-3. 로컬 서버 주소(예: `http://127.0.0.1:5500`)로 접속합니다.
+3. 로컬 서버 주소(예: `http://127.0.0.1:5370`)로 접속합니다.
 
 ## 스크린샷
 
-| 데스크톱 | 모바일 | 다크모드 |
-|---|---|---|
-| *(추가 예정)* | *(추가 예정)* | *(추가 예정)* |
+데스크톱 hero
+<img width="1599" height="861" alt="스크린샷 2026-09-24 오전 6 10 37" src="https://github.com/user-attachments/assets/7155a4b9-589b-473e-8262-e01c41b4e7ca" />
+다크모드 skills/projects
+<img width="1600" height="856" alt="스크린샷 2026-09-24 오전 6 11 17" src="https://github.com/user-attachments/assets/8a47a106-85a6-4591-af8a-241044337cc9" />
+모바일 contact
+<img width="487" height="704" alt="스크린샷 2026-09-24 오전 6 12 00" src="https://github.com/user-attachments/assets/bfca33ac-804a-4007-b646-af1d0336776d" />
