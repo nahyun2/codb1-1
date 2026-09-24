@@ -24,7 +24,7 @@ const messageError = document.querySelector('#message-error');
 const formSuccess = document.querySelector('#form-success');
 
 const GITHUB_USERNAME = 'nahyun2';
-const MAX_PROJECTS = 6;
+const MAX_PROJECTS = 7;
 
 // ========== 다크 모드 토글 + localStorage 저장/복원 ==========
 const THEME_KEY = 'theme';
